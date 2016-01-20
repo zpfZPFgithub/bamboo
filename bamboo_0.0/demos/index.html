@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+	<link type="text/css" rel="stylesheet" href="index.css" />
+	<script src="../src/jquery-1.10.1.min.js"></script>
+    <script src="indexData.js"></script>
+</head>
+<body>
+    <div class="navbar" style="z-index:1" role="navigation">
+        <div class="navbar-inner-wrap">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="">
+                    BAMBOO UI
+                </a>
+            </div>
+            <div class="navbar-list-wrap">
+                <ul>
+                    <li>
+                        <a href="../api/index.html"><i class="fa fa-book"></i> API</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">案例展示</a>
+                    </li>
+                    <li class="">
+                        <a href="#">关于</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="z-index:2" id="main" class="index-main">
+        <div class="pa w200" style="left:20px;" id="left">
+        </div>
+        <div class="pa none" id="right">
+            <iframe class="rightIframe" frameborder="0" src=""></iframe>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var $main = $("#main");
+        var $left = $("#left");
+        var $right = $("#right");
+        var $iframe = $right.find("iframe");
+        var win_w = $(window).width();
+        var win_h = $(window).height();
+        $main.css({ "height": (win_h - 50) + "px" });
+        $iframe.css({ "height": (win_h - 55) + "px" });
+        $right.css({ "left": "240px", "width": (win_w - 240) + "px" }).show();
+        function getLeftNavi() {
+            var str = '';
+            for (var i = 0; i < indexdata.length; i++) {
+                str += '<ul class="nav-level-1"><li class="nav-level-1-list"><h4>' + indexdata[i].text + '</h4> <ul class="nav-level-2">';
+                if (indexdata[i].children.length > 0) {
+                    for (var j = 0; j < indexdata[i].children.length; j++) {
+                        var listO = indexdata[i].children[j];
+                        str += '<li class="nav-level-2-list" url="' + listO.url + '"><a href="javascript:void(0)">' + listO.text + '</a></li>';
+                    }
+                }
+            }
+            str += '</ul></li></ul>';
+            return str;
+        }
+        $(function () {
+            $left.html(getLeftNavi());
+            $left.on("click", ".nav-level-2-list", function () {
+                $iframe.prop("src", $(this).attr("url"));
+            })
+            $iframe.on("load", function () {
+                var $iframeHtml = $iframe.contents().find("html");
+                $iframe.css({ height: $iframeHtml.height() });
+              
+            });
+        })
+    </script>
+</body>
+</html>

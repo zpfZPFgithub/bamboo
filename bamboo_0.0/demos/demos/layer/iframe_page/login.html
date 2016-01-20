@@ -1,0 +1,171 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link rel="stylesheet" href="http://skin.huitu.com/css/userV2/loginRegis.css" />
+</head>
+<body style="padding-bottom:20px">
+    <div class="pop-login">
+        <div class="pop-memu">
+            <div class="menuItem menuItemOn login-menu">
+                <a href="javascript:void(0)">普通登录</a>
+            </div>
+            <div class="pop-menuLine"></div>
+            <div class="menuItem reg-menu">
+                <a href="http://user.huitu.com/accounts/popreg">手机验证码快捷注册</a>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="loginM">
+            <div>
+                <form action="/op/loginPop.aspx" method="post" target="_self">
+                    <input name="__RequestVerificationToken" type="hidden" value="zz3fFfjwwF0QlnY23USitKvuMb2pqYe2jhC1WgwLjXlbgOm7vtlk7S1jdGAFGN8fe4qqOUlCPoPu_QIZ_GZeeE8N3fi0YajfXlSca88WS5g1" />                    <div class="inpWrap">
+                        <div class="inpdiv1">
+                            <input id="Nickname" name="Nickname" type="text" />
+                            <div class="extraIntro pa">用户名/手机号</div>
+                        </div>
+                        <span class="field-validation-valid" data-valmsg-for="Nickname" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="inpWrap">
+                        <div class="inpdiv1">
+                            <input id="inpPass" name="Password" type="password" value="" />
+                            <div class="extraIntro pa">密码</div>
+                        </div>
+                        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                    <div style="display:none" class="inpWrap">
+                        <div class="inpdiv1">
+                            <input id="inpSetPass" name="Pword" type="password" value="" />
+                            <div class="extraIntro pa">设置密码（下次可以直接使用该密码登录，必填）</div>
+                        </div>
+                        <span class="field-validation-valid" data-valmsg-for="Pword" data-valmsg-replace="true"></span>
+                    </div>
+                    <div style="display:none" class="inpWrap">
+                        <div class="inpdiv1">
+                            <input id="inpRSetPass" name="RPword" type="password" value="" />
+                            <div class="extraIntro pa">确认密码</div>
+                        </div>
+                        <span class="field-validation-valid" data-valmsg-for="RPword" data-valmsg-replace="true"></span>
+                    </div>
+                    <div style="display:none" id="emailCheckWrap">
+                        <div class="inpWrap">
+                            <div class="inpdiv1 inpdiv_lock">
+                                <input id="inpEmail" name="Email" disabled="disabled" type="text" value="" />
+                            </div>
+                            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                        <div class="inpWrap">
+                            <div class="inpdiv1 loginMList_eCode">
+                                <input type="text" name="Vc" id="emailCode">
+                                <div class="extraIntro pa">邮件验证码</div>
+                            </div>
+                            <div class="checkCode" id="getEcodeBut">获取验证码</div>
+                            <div style="clear:both"> </div>
+                            <span class="field-validation-valid" data-valmsg-for="Vc" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div style="display:none" class="inpWrap">
+                        <div class="inpdiv1">
+                            <input id="inpMobile" name="Mobile" type="text" />
+                            <div class="extraIntro pa">注册手机号</div>
+                        </div>
+                        <span class="field-validation-valid" data-valmsg-for="Mobile" data-valmsg-replace="true"></span>
+                    </div>
+                    <div style="display:none" class="inpWrap">
+                        <div class="inpdiv1 loginMList_eCode">
+                            <input type="text" name="MobileCode" id="mobileCode">
+                            <div class="extraIntro pa">手机验证码</div>
+                        </div>
+                        <div class="checkCode" id="getMcodeBut">获取验证码</div>
+                        <div style="clear:both"> </div>
+                        <span class="field-validation-valid" data-valmsg-for="MobileCode" data-valmsg-replace="true"></span>
+                    </div>
+                    <div style="display:none" class="inpWrap">
+                        <div class="inpdiv1 loginMList_eCode">
+                            <input type="text" value="" name="VerifyCode" maxlength="5" id="picCode">
+                            <div class="extraIntro pa">图片验证码</div>
+                        </div>
+                        <div class="checkCode" id="getPcodeBut">获取验证码</div>
+                        <div style="clear:both"></div>
+                        <span class="field-validation-valid" data-valmsg-for="VerifyCode" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="loginSub">
+                        <input id="sub" type="submit" value="立即登录">
+                    </div>
+                </form>                <div class="loginMBot">
+                    <div class="forgetPass">
+                        <i>?</i>
+                        <a href="/op/ForgetPassword.aspx" target="_blank">忘记密码?</a>
+                    </div>
+                    <span class="goReg">还没有帐号，赶快去<a href="/Accounts/Reg" target="_blank">注册</a></span>
+                </div>
+                <div class="pop-third-login">
+                    <i>使用其他账号登录：</i>
+                    <a target="_blank" href="http://login.nipic.com/account/auth/nipic?backurl="><span class="pop-nipic"></span></a>
+                    <a target="_blank" href="http://user.huitu.com/QuickAccounts/QzoneLogin?backurl="><span class="pop-qq"></span></a>
+                    <a target="_blank" href="http://user.huitu.com/api/login/alipay/login.aspx?backurl="><span class="pop-alipay"></span></a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <script type="text/javascript" src="http://skin.huitu.com/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://skin.huitu.com/js/lib/require.js"></script>
+    <script type="text/javascript" src="http://skin.huitu.com/js/lib/require.config.js"></script>
+    <script type="text/javascript">
+        document.domain = 'huitu.com'
+        require(['userInfoCheck', 'Bamboo'], function (User, B) {
+            B.tool.loadPlaceHolder();
+            var
+                $userName = $("#Nickname"),
+                $inpMobile = $("#inpMobile"),
+                $pass = $("#inpPass"),
+                $setPass = $("#inpSetPass"),
+                $rSetPass = $("#inpRSetPass"),
+                $emailCheckWrap = $("#emailCheckWrap"),
+                $inpEmail = $("#inpEmail"),
+                $emailCode = $("#emailCode"),
+                $mobileCode = $("#mobileCode"),
+                $picCode = $("#picCode"),
+                $agree = $("#argeeFir");
+
+            // 绑定
+            var userInfo = new User();
+            userInfo.bindLoginUser($userName)
+            userInfo.bindPass($pass);// 密码
+            userInfo.bindMobile($inpMobile, 'checkIsAvalible');
+            userInfo.bindMobileCode($mobileCode, $inpMobile, "login")
+            userInfo.bindPass($setPass, $rSetPass);// 设置密码
+            userInfo.bindRPass($rSetPass, $setPass);// 确认密码
+            userInfo.bindEmailCode($emailCode, $userName)
+            userInfo.bindCode($picCode);
+            var usernameVal = $.trim($userName.val());
+            if (usernameVal != "") {
+                $userName.trigger("blur");
+            }
+            $("#sub").on("click", function (event) {
+                if (userInfo.checkLoginUser($userName) && ($pass.is(":hidden") || userInfo.checkPass($pass))
+                     && ($setPass.is(":hidden") || userInfo.checkPass($setPass, $rSetPass))
+                     && ($rSetPass.is(":hidden") || userInfo.checkRepeatPass($rSetPass, $setPass))
+                    && ($inpMobile.is(":hidden") || userInfo.checkMobile($inpMobile, 'checkIsAvalible'))
+                     && ($mobileCode.is(":hidden") || userInfo.checkMobileCode($mobileCode))
+                     && ($emailCode.is(":hidden") || userInfo.checkEmailCode($emailCode))
+                     && ($picCode.is(":hidden") || userInfo.checkCode($picCode))
+                    ) {
+                    return true;
+                }
+                return false;
+            })
+
+        })
+    </script>
+</body>
+</html>
+
+
+

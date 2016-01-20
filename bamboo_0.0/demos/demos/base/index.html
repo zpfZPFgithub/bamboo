@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <h2 class="demo-title1">基本拖动</h2>
+        <div class="mt15" style="width: 200px; height: 200px;">
+            <div id="drag1" style="width:200px;height:200px;background:green;cursor:move"></div>
+        </div>
+        <script>
+            bamboo.drag({
+                $tar: $("#drag1"), // 拖动的元素, 必须
+                $drag: $("#drag1"), // 拖动触发的元素, 默认同$tar
+                moveOut: 0, // 是否允许拖出窗口外面。0：不允许；1：允许
+                moveType: 0, // 拖拽方式。默认 0：留阴影拖拽；1：无阴影直接拖拽
+            })
+            
+        </script>
+        <h2 class="demo-title1">框内拖动</h2>
+        <div class="mt15" style="position: relative; width: 300px; height: 300px; border: 10px solid #ff0000;">
+            <div id="drag2area" style="z-index: 1;top:0;left:0; position: absolute;  width: 300px; height: 300px; background: #808080;  position: absolute; "></div>
+            <div id="drag2" style="z-index: 2; position:absolute; width: 200px; height: 200px; background: pink; cursor: move"></div>
+        </div>
+        <script>
+            bamboo.drag({
+                $tar: $("#drag2"), // 拖动的元素, 必须
+                $drag: $("#drag2"), // 拖动触发的元素, 默认同$tar
+                $moveLimit: $("#drag2area"),
+                moveOut: 0 // 是否允许拖出窗口外面。0：不允许；1：允许
+            })
+            
+        </script>
+        <h2 class="demo-title1">改变大小</h2>
+        <div class="mt15" style="width:200px;height:200px;position:relative;">
+            <div id="resize1" style="position: absolute; width: 200px; height: 200px; border: 1px solid #ff0000;"></div>
+        </div>
+        <script>
+            bamboo.resize({
+                $tar: $("#resize1")
+            });
+        </script>
+        <h2 class="demo-title1">改变大小（限制宽高）</h2>
+        <p>长宽不小于100，不大于200</p>
+        <div class="mt15" style="width:200px;height:200px;position:relative;">
+            <div id="resize2" style="position: absolute; width: 200px; height: 200px; border: 1px solid #ff0000;"></div>
+        </div>
+        <script>
+            bamboo.resize({
+                $tar: $("#resize2"),
+                minWidth: 100,
+                minHeight: 100,
+                maxWidth: 200,
+                maxHeight: 200
+            });
+        </script>
+        <h2 class="demo-title1">改变大小（等比缩放）</h2>
+        <p>长宽不小于100，不大于200</p>
+        <div class="mt15" style="width:200px;height:200px;position:relative;">
+            <div id="resize3" style="position: absolute; width: 200px; height: 200px; border: 1px solid #ff0000;"></div>
+        </div>
+        <script>
+            bamboo.resize({
+                $tar: $("#resize3"),
+                lockRate: true
+            });
+        </script>
+        <h2 class="demo-title1">拖动并改变大小</h2>
+        <p>长宽不小于100，不大于200</p>
+        <div class="mt15" style="width:200px;height:200px;position:relative;">
+            <div id="resize4" style="position: absolute;cursor:move; width: 200px; height: 200px; border: 1px solid #ff0000;"></div>
+        </div>
+        <script>
+            
+            bamboo.drag({
+                $tar: $("#resize4"), // 拖动的元素, 必须
+                $drag: $("#resize4"), // 拖动触发的元素, 默认同$tar
+                moveOut: 0, // 是否允许拖出窗口外面。0：不允许；1：允许
+                noTriggerClass: "b-trigger-resize",
+            })
+            
+            bamboo.resize({
+                $tar: $("#resize4")
+            });
+        </script>
+    </div>
+   
+</body>
+
+
+</html>

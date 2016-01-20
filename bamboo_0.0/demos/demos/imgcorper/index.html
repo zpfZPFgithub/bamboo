@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="http://skin.huitu.com/js/lib/require.js"></script>
+    <script src="http://skin.huitu.com/js/lib/require.config.js"></script>
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <div id="imgCorper" style="float:left;width:400px;height:300px;overflow:auto;"></div>
+        <div id="viewDiv" style="float:left;margin-left:30px;"></div>
+        <div style="clear:both"></div>
+        <div id="bgSize" style="margin-top:30px;position:relative"></div>
+    </div>
+    <script>
+        bamboo.imgcorper({
+            $con: $("#imgCorper"),
+            imgSrc: "1.jpg",
+            $viewDiv: $("#viewDiv"),
+            $resizeBg: $("#bgSize")
+        });
+
+    </script>
+</body>
+
+
+</html>

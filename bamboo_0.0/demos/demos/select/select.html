@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <script src="http://skin.huitu.com/js/lib/require.js"></script>
+    <script src="http://skin.huitu.com/js/lib/require.config.js"></script>
+    <style>
+        .b-select-margin {float:left;margin: 0 20px 0 0 ;}
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <h2>省市级联的实现</h2>
+        <select class="dropdownlist2" name="provinceV2" id="provinceV2"></select>
+        <select style="display:none" class="dropdownlist2" name="cityV2" id="cityV2"></select>
+        <select style="display:none" class="dropdownlist2" name="regionV2" id="regionV2"></select>
+</div>
+    <script>
+        var _INITDATA = {
+            _R: {
+                city: 110103
+            }
+        }
+        require(['../js/addrSet.js'], function (AddrSet) {
+            $(function () {
+                var s1, s2, s3;
+                var addr = new AddrSet();
+                
+                s1 = bamboo.select($("#provinceV2"), {
+                    skin: "b-select-margin",
+                    onChange: function () {
+                        s2.initSelfSelect();
+                        s3.initSelfSelect();
+                    }
+                })
+
+                s2 = bamboo.select($("#cityV2"), {
+                    skin: "b-select-margin",
+                    onChange: function () {
+                        s3.initSelfSelect();
+                    }
+                })
+                
+               
+                s3 = bamboo.select($("#regionV2"), {
+                    skin: "b-select-margin",
+                    success: function (t) {
+                        if ($("#regionV2").find("option")[1]) {
+                            $("#b-select-" + t.index).show();
+                        } else {
+                            $("#b-select-" + t.index).hide();
+                        }
+                    }
+                })
+                
+            });
+        })
+        
+    </script>
+</body>
+
+</html>

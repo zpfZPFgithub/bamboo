@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+	<script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+</head>
+<body>
+    <div class="demos-main">
+        <div>
+            <input value="基本信息框" type="button" id="tip1" />
+            <input value="带图标半透明2s后消失" type="button" id="tip2" />
+            <input value="不带图标半透明2s后消失" type="button" id="tip3" />
+            <input value="带图标信息框" type="button" id="tip4" />
+            <input value="透明信息框带动画" type="button" id="tip5" />
+            <input value="带按钮信息框" type="button" id="tip6" />
+            <input value="带按钮信息框(一个按钮)" type="button" id="tip7" />
+            <input value="多次弹出信息框" type="button" id="tip8" />
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#tip1").on("click", function () {
+                bamboo.layer({
+                    area: ["300px"],
+                    shift: 0,
+                    content: "你是美女吗?"
+                })
+            })
+            $("#tip2").on("click", function () {
+                bamboo.layer({
+                    content: "你是美女吗?",
+                    bgStyle:{opacity: 0.3},
+                    icon:"1",
+                    skin: "b-layer-hui",
+                    title: false,
+                    time: 2000,
+                    type: 0,
+                    closeBtn: false,
+                    shade: false
+                })
+            })
+            $("#tip3").on("click", function () {
+                bamboo.layer({
+                    content: "你是美女吗?",
+                    bgStyle:{opacity: 0.3},
+                    skin: "b-layer-hui",
+                    title: false,
+                    time: 2000,
+                    type: 0,
+                    closeBtn: false,
+                    shade: false
+                })
+            })
+            $("#tip4").on("click", function () {
+                bamboo.layer({
+                    content: "你是美女吗?",
+                    icon: "0",
+                    shade: false
+                })
+            })
+            $("#tip5").on("click", function () {
+                bamboo.layer({
+                    content: "你是美女吗?",
+                    skin: "b-layer-hui",
+                    title: false,
+                    shift: 6,
+                    time: 2000,
+                    type: 0,
+                    closeBtn: false,
+                    shade: false
+                })
+            })
+            $("#tip6").on("click", function () {
+                bamboo.layer({
+                    area: ["300px"],
+                    btn: ["确定", "关闭"],
+                    shift: 0,
+                    content: "你是美女吗?",
+                    btn1: function (t) {
+                        alert("第一个按钮回调")
+                    },
+                    btn2: function (t) {
+                        t.close(t.index);
+                    }
+                })
+            })
+            $("#tip7").on("click", function () {
+                bamboo.layer({
+                    area: ["300px"],
+                    btn: ["确定"],
+                    shift: 0,
+                    content: "你是美女吗?",
+                    btn1: function (t) {
+                        t.close(t.index);
+                    }
+                })
+            })
+       
+            $("#tip8").on("click", function () {
+                bamboo.layer({
+                    area: ["300px"],
+                    btn: ["确定", "再弹", "关闭"],
+                    shift: 0,
+                    content: "让你一次弹个够，第一次",
+                    btn1: function (t) {
+                        alert("第一个按钮回调")
+                    },
+                    btn2: function (t) {
+                        t.close(t.index);
+                        bamboo.layer({
+                            area: ["300px"],
+                            btn: ["再弹", "关闭"],
+                            shift: 0,
+                            content: "让你一次弹个够，第二次",
+                            btn1: function (t) {
+                                t.close(t.index);
+                                bamboo.layer({
+                                    area: ["300px"],
+                                    btn: ["再弹", "关闭"],
+                                    shift: 0,
+                                    content: "让你一次弹个够，第三次",
+                                    btn1: function (t) {
+                                        t.close(t.index);
+                                        bamboo.layer({
+                                            content: "别这么听话，我关闭了...",
+                                            skin: "b-layer-hui",
+                                            title: false,
+                                            time: 2000,
+                                            type: 0,
+                                            closeBtn: false,
+                                            shade: false
+                                        })
+                                    },
+                                    btn2: function (t) {
+                                        t.close(t.index);
+                                    }
+                                })
+                            },
+                            btn2: function (t) {
+                                t.close(t.index);
+                            }
+                        })
+                    },
+                    btn3: function (t) {
+                        t.close(t.index);
+                    }
+                })
+            })
+        })
+
+    </script>
+</body>
+    
+</html>

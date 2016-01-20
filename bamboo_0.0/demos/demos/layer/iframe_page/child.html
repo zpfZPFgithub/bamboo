@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../../src/bamboo-1.0.1.all.js"></script>
+
+</head>
+<body style="padding:25px;">
+    <div class="demos-main">
+        <div>
+            <input value="执行父页面的关闭方法" type="button" id="tip2" />
+            <input value="改变父页面元素" type="button" id="tip3" />
+        </div>
+        <img />
+    </div>
+    <script charset="utf-8">
+        $(function () {
+         
+            $("#tip2").on("click", function () {
+                parent.tipO3.close(parent.tipO3.index);
+            })
+            $("#tip3").on("click", function () {
+                $("#tip3", parent.document).val("我被改变了").css("color", "red");
+                parent.tipO3.close(parent.tipO3.index);
+            })
+            
+
+        });
+    </script>
+</body>
+
+</html>

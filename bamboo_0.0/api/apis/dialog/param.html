@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../api.css" />
+</head>
+<body>
+    <div class="api-main">
+        <h2 class="api-h2">参数列表</h2>
+        <table class="api-table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="th1">参数名</th>
+                    <th class="th2"> 类型</th>
+                    <th class="th3">描述</th>
+                    <th class="th4">默认值</th>
+                    <th class="th5">tip</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>type</td>
+                    <td>Int</td>
+                    <td>5种层类型。可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）</td>
+                    <td>0</td>
+                    <td> open({type: 1})方式调用时，type不可为空（信息框除外）</td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td>String/Array/Boolean</td>
+                    <td>支持三种类型的值，若你传入的是普通的字符串，如title :'我是标题'，那么只会改变标题文本；若你还需要自定义标题区域样式，那么你可以title: ['文本', 'font-size:18px;']，数组第二项可以写任意css样式；如果你不想显示标题栏，你可以title: false</td>
+                    <td>汇图网</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td>String/DOM/Array</td>
+                    <td>可以是文本，可以是字符串，可以使dom，可以是数组（type==2时候使用）。</td>
+                    <td>空字符串</td>
+                    <td> type==2时，['http://sentsin.com', 'no']表示无滚动条；</td>
+                </tr>
+                <tr>
+                    <td>skin</td>
+                    <td>String</td>
+                    <td>传入您自定义的class名。你可以借助skin轻松完成不同的风格定制</td>
+                    <td>空字符串</td>
+                    <td> layer.open({skin: 'demo-class'});，对应的样式可以是<br />body .demo-class .layui-layer-title{background:#c00; color:#fff; border: none;}</td>
+                </tr>
+                <tr>
+                    <td>area</td>
+                    <td>String/Array</td>
+                    <td>设置宽高，默认宽高自适应，你也可以area: '500px'， 或者area: ['500px', '300px']</td>
+                    <td>auto</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>offset </td>
+                    <td>String/Array</td>
+                    <td>但当你只想定义top时，你可以offset: '100px'。当您top、left都要定义时，你可以offset: ['100px', '200px']。除此之外，你还可以定义offset: 'rb'，表示右下角。其它的特殊坐标，你可以自己计算赋值。</td>
+                    <td>垂直水平居中</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>area</td>
+                    <td>String/Array</td>
+                    <td>设置宽高，默认宽高自适应，你也可以area: '500px'， 或者area: ['500px', '300px']</td>
+                    <td>auto</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>icon</td>
+                    <td>Int</td>
+                    <td>当你想显示图标时，默认皮肤可以传入0-6如果是加载层，可以传入0-2</td>
+                    <td>不显示</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>btn</td>
+                    <td>Int</td>
+                    <td>当您只想自定义一个按钮时，你可以btn: '我知道了'，当你要定义两个按钮时，你可以btn: ['yes', 'no'],</td>
+                    <td>不显示</td>
+                    <td>比如：btn: ['按钮1', '按钮2', '按钮3', …]，按钮1和按钮2的回调分别是yes和cancel，而从按钮3开始，则回调为btn3: function(){}</td>
+                </tr>
+                <tr>
+                    <td>shade</td>
+                    <td>Number/Array/Boolean</td>
+                    <td>默认是0.3透明度的黑色背景（'#000'）。如果你想定义别的颜色，可以shade: [0.8, '#393D49']；如果你不想显示遮罩，可以shade: 0</td>
+                    <td>0.3</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>shadeClose </td>
+                    <td>Boolean</td>
+                    <td>是否点击遮罩关闭</td>
+                    <td>0.3</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>time</td>
+                    <td>Boolean</td>
+                    <td>自动关闭所需毫秒</td>
+                    <td>不自动关闭</td>
+                    <td>当你想自动关闭时，可以time: 5000，即代表5秒后自动关闭，注意单位是毫秒（1秒=1000毫秒） </td>
+                </tr>
+                <tr>
+                    <td>shift </td>
+                    <td>0-6</td>
+                    <td>动画全部采用CSS3。这意味着除了ie6-9，其它所有浏览器都是支持的。可支持的动画类型有0-6</td>
+                    <td>0</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>fix </td>
+                    <td>Boolean</td>
+                    <td>鼠标滚动时，层是否固定在可视区域。如果不想，设置fix: false即可</td>
+                    <td>true</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>scrollbar</td>
+                    <td>Boolean</td>
+                    <td>是否允许浏览器出现滚动条</td>
+                    <td>true</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>move</td>
+                    <td>Boolean</td>
+                    <td>默认是触发标题区域拖拽。如果你想单独定义，指向元素的选择器或者DOM即可。如move: '.mine-move'。你还配置设定move: false来禁止拖拽</td>
+                    <td>.layui-layer-title</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>moveType</td>
+                    <td>Number</td>
+                    <td>默认的拖拽风格有个过度的透明框。但是如果你不喜欢，你可以设定moveType: 1切换到传统的拖拽模式</td>
+                    <td>0</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>moveOut </td>
+                    <td>Boolean</td>
+                    <td>是否允许拖拽到窗口外</td>
+                    <td>false</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>iframeAuto</td>
+                    <td>Boolean/Array</td>
+                    <td>是否开启定时器，轮询监测iframe高度的变化，同步到父元素高度</td>
+                    <td>false</td>
+                    <td>不建议使用，虽然经过测试和试验，性能上问题不大，但是开定时器轮询的方式还是不友好。特殊情况下使用。Array时，启动轮询，[true || false, false]表示启动轮询，不自动调整位置;[true, true]表示启动轮询，自动调整位置;</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+
+</html>

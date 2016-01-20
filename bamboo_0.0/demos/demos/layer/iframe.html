@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <style>
+        .b-layer-nobg {
+            background: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <div>
+            <input value="普通Iframe" type="button" id="tip1" />
+            <input value="高度动态改变Iframe" type="button" id="tip2" />
+            <input value="iframe子父操作" type="button" id="tip3" />
+        </div>
+        <img />
+    </div>
+    <script charset="utf-8">
+        $(function () {
+            var $c = $('<div><div id="floatbox07884313226291066" style="height: 209px; top: 630px; left: 331px; background: transparent url(&quot;http://skin.huitu.com/images/userV2/guide/stepBg.png&quot;) repeat scroll 0% 0%; box-shadow: none; width: 421px; display: block; margin: 0px;"><span class="close-floatbox b-layer-close" title="关闭" style="background: #be865e;cursor:pointer;border:2px solid #be865e;border-radius:24px;color:#fff;font-family:宋体;font-size:15px;font-weight:bold;height:25px;line-height:25px;position:absolute;left:10px;text-align:center;top:-7px;width:25px;" id="floatboxClose07111068568529456">×</span><div><img src="http://skin.huitu.com/images/userV2/guide/list/step1.png" style="position: absolute; top: 45px; left: 45px; display: block;"><p style="position: absolute; top: 40px; left: 168px; width: 235px; line-height: 26px; font-family: microsoft yahei; font-size: 16px; color: rgb(112, 102, 95);"><span class="guideText">我不是万能的，部分格式作品无法自动生成，请手动上传预览图哦！</span><span style="width: 88px; height: 38px; color: rgb(255, 255, 255); text-align: center; margin: 10px 0px 0px; line-height: 38px; cursor: pointer; background: transparent url(&quot;http://skin.huitu.com/images/userV2/guide/but.png&quot;) repeat scroll 0% 0%; display: block;" id="guideNext">下一步</span></p></div></div>');
+            $("#tip1").on("click", function () {
+                tipO1 = bamboo.layer({
+                    area: ["780px", "520px"],
+                    type: 2,
+                    content: "http://user.huitu.com/op/lawabout.html"
+                });
+            })
+
+
+            $("#tip2").on("click", function () {
+                tipO1 = bamboo.layer({
+                    area: ["500px", "384px"],
+                    iframeAuto: [true, false],
+                    type: 2,
+                    content: "iframe_page/login.html"
+                });
+
+            })
+
+            $("#tip3").on("click", function () {
+                window.tipO3 = bamboo.layer({
+                    area: ["500px", "200px"],
+                    type: 2,
+                    content: "iframe_page/child.html"
+                });
+            })
+
+        });
+    </script>
+</body>
+
+</html>

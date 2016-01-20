@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <script src="http://skin.huitu.com/js/lib/require.js"></script>
+    <script src="http://skin.huitu.com/js/lib/require.config.js"></script>
+    <style>
+        .b, .b a, .b input, .b button{color:red}
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <div id="page"></div>
+    </div>
+    <script>
+        $(function () {
+            bamboo.page({
+                $e: $("#page"),
+                curr: 10,
+                skin: "b",
+                groups: 5,
+                skip: true,
+                pages: 20,
+                first: false,
+                last: false,
+                prev: false,
+                next: false,
+                curr: (function () {
+                    var page = location.href.match(/page=(\d+)/);
+                    console.log(page)
+                    return page ? parseInt(page[1]) : 1;
+                }()),
+                jump: function (t, isFirst) {
+                    if(!isFirst){
+                        location.href = '?page=' + t.opts.curr;
+                    }
+                }
+            });
+        })
+
+    </script>
+</body>
+
+
+</html>

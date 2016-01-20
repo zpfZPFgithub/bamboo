@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../api.css" />
+</head>
+<body>
+    <div class="api-main">
+        <h2 class="api-title">公开接口</h2>
+        <div>
+            <p class="api-p">公开接口指的是暴露在bamboo全局变量下的属性方法。整个UI框架只有bamboo变量是暴露在window下的。</p>
+        </div>
+        <h2 class="api-title">接口列表</h2>
+        <h2 class="api-h2 mt15">属性</h2>
+        <table class="api-table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="th1">属性名</th>
+                    <th class="th1">类型</th>
+                    <th class="th2"> 介绍</th>
+                    <th class="th3">示例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ie6</td>
+                    <td>boolean</td>
+                    <td>判断浏览器版本是否是ie6.</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="api-h2 mt30">方法</h2>
+        <table class="api-table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="th1">方法名</th>
+                    <th class="th2">返回值</th>
+                    <th class="th3">介绍</th>
+                    <th class="th4">示例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>throttle(fn, delay, immediate, debounce)</td>
+                    <td>function</td>
+                    <td>创建并返回一个节流函数。当重复调用函数的时候，至少每隔delay毫秒调用一次。在onresize, onscroll, onmousemove等情况下考虑使用</td>
+                    <td>$(window).on("resize", bamboo.throttle(function(){}, 200, false))</td>
+                </tr>
+                <tr>
+                    <td>debounce(fn, delay, immediate)</td>
+                    <td>function</td>
+                    <td>相对于throttle函数的连续delay执行，debounce函数会在最后调用函数delay毫秒之后执行。在onmouseup,不小心点击两次提交按钮等情况下使用</td>
+                    <td>$(window).on("resize", bamboo.throttle(function(){}, 200, false))</td>
+                </tr>
+                <tr>
+                    <td>drag({})</td>
+                    <td>Drag类的示例</td>
+                    <td>需要拖动某个元素时候，调用bamboo.drag({})</td>
+                    <td>drag({})</td>
+                </tr>
+                <tr>
+                    <td>resize({})</td>
+                    <td>Resize类的示例</td>
+                    <td>需要缩放某个元素时候，调用bamboo.resize({})</td>
+                    <td>bamboo.resize({})</td>
+                </tr>
+                <tr>
+                    <td>layer({})</td>
+                    <td>Layer类的示例</td>
+                    <td>弹出窗</td>
+                    <td>bamboo.layer({})</td>
+                </tr>
+                <tr>
+                    <td>select({})</td>
+                    <td>Select类的示例</td>
+                    <td>自定义滚动条</td>
+                    <td>bamboo.select({})</td>
+                </tr>
+                <tr>
+                    <td>page({})</td>
+                    <td>Page类的示例</td>
+                    <td>分页</td>
+                    <td>bamboo.page({})</td>
+                </tr>
+                <tr>
+                    <td>imgcorper({})</td>
+                    <td>Imgcorper类的示例</td>
+                    <td>图片切割程序综合</td>
+                    <td>bamboo.imgcorper({})</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
