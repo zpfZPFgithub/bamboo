@@ -61,6 +61,11 @@
           { url: "demos/imgcorper/index.html", text: "自定义滚动条" }
         ]
     },
+    {
+        text: '测试', children: [
+          { url: "demos/test/cssAnimation.html", text: "css动画测试" }
+        ]
+    }
 ];
 
 

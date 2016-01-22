@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <style>
+        .b-layer-nobg {
+            background: none;
+            box-shadow: none;
+        }
+        .indexSlider{margin: 20px auto;width:1180px;height:440px;overflow:hidden}
+        .b-slider-list {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .indexSlider .HTSlider-tab-navitem {
+            width: 34px;
+            height: 40px;
+            cursor: pointer;
+            text-align: left;
+            float: left;
+            display: inline;
+            margin-right: 5px;
+        }
+
+            .indexSlider .HTSlider-tab-navitem img {
+                width: 34px;
+                height: 34px;
+                margin: 3px 0 0 0;
+                border-radius: 34px;
+            }
+
+            .indexSlider .HTSlider-tab-navitem a {
+                display: none;
+                font-weight: normal;
+                color: #ffffff;
+                height: 34px;
+                line-height: 34px;
+            }
+
+        .indexSlider .HTSlider-tab-navon {
+            z-index: 2;
+            width: 220px;
+            background: rgba(0,0,0,0.7) none repeat scroll !important;
+            background: #000;
+            filter: Alpha(opacity=70);
+            color: #ffffff;
+            border-radius: 40px;
+            height: 40px;
+        }
+
+            .indexSlider .HTSlider-tab-navon img {
+                float: left;
+                display: inline;
+                margin: 3px 0 0 3px;
+                position: relative;
+            }
+
+            .indexSlider .HTSlider-tab-navon a {
+                float: left;
+                display: inline;
+                height: 40px;
+                line-height: 40px;
+                font-size: 12px;
+                margin-left: 8px;
+                font-family: 微软雅黑;
+                position: relative;
+                color: #fff;
+                text-decoration: none;
+            }
+
+                .indexSlider .HTSlider-tab-navon a:hover {
+                    text-decoration: underline;
+                }
+
+        .indexSlider .HTSlider-tab-navon1 {
+            text-align: right;
+        }
+
+            .indexSlider .HTSlider-tab-navon1 a {
+                float: right;
+                margin-right: 8px;
+            }
+
+            .indexSlider .HTSlider-tab-navon1 img {
+                margin: 3px 3px 0 0;
+                float: right;
+            }
+
+        .indexSlider .HTSlider-tab-navon .b1 {
+            float: left;
+            display: inline;
+        }
+
+        .indexSlider .HTSlider-tab {
+            left: 0px;
+            bottom: 0px;
+        }
+
+        .indexSlider .HTSlider-tab-nav {
+            height: 40px;
+            z-index: 2;
+        }
+
+
+        .indexSlider1 {
+            margin: 0 auto;
+            font-size: 14px;
+            line-height: 38px;
+        }
+
+            .indexSlider1 .HTSlider-imglist {
+                left: 0px;
+                top: 0px;
+                height: 38px;
+                width: 10000px;
+                list-style-type: disc;
+            }
+
+            .indexSlider1 .HTSlider-imgbox {
+                width: 1030px;
+                height: 38px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .indexSlider1 .HTSlider-imgitem {
+                width: 334px;
+                height: 38px;
+                margin-left: 14px;
+            }
+
+            .indexSlider1 .HTSlider-imgitemAC {
+                color: #404040;
+                text-decoration: none;
+                max-width: 170px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+                .indexSlider1 .HTSlider-imgitemAC:hover {
+                    text-decoration: underline;
+                }
+        .noticeList {
+            color: #f01e00;
+            font-family: Tahoma;
+            margin: 0 7px;
+        }
+
+        .noticeTit {
+            font: normal 14px "微软雅黑","Microsoft YaHei";
+            color: #404040;
+            margin-right: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <h2>带缩略图的滑动效果， 水平滑动</h2>
+    </div>
+    <div class="pr indexSlider" id="indexSlider">
+        <ul>
+            <li class="b-slider-list">
+                <a href="">
+                    <img src="../_images/slider-index-1.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-2.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-3.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-4.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-5.jpg" />
+                </a>
+            </li>
+        </ul>
+        <div class="pa HTSlider-tab-nav" style="width: 381px; left: 405px; bottom:20px;">
+            <span title="2016猴年设计素材" class="inline-block HTSlider-tab-navitem  HTSlider-tab-navon">
+                <img alt="2016猴年设计素材" src="../_images/slider-index-small1.jpg">
+                <a href="http://www.huitu.com/topic-detail/1109.html" target="_blank">2016猴年设计素材</a>
+            </span>
+            <span title="猴年展板" class="inline-block HTSlider-tab-navitem">
+                <img alt="猴年展板" src="../_images/slider-index-small2.jpg">
+                <a href="http://www.huitu.com/topic-detail/1056.html" target="_blank">猴年展板</a>
+            </span>
+            <span title="呼伦贝尔草原图片" class="inline-block HTSlider-tab-navitem">
+                <img alt="呼伦贝尔草原图片" src="../_images/slider-index-small3.jpg">
+                <a href="http://www.huitu.com/topic-detail/853.html" target="_blank">呼伦贝尔草原图片</a>
+            </span>
+            <span title="全家福人像摄影专题" class="inline-block HTSlider-tab-navitem">
+                <img alt="全家福人像摄影专题" src="../_images/slider-index-small4.jpg">
+                <a href="http://www.huitu.com/topic-detail/1160.html" target="_blank">全家福人像摄影专题</a>
+            </span>
+            <span title="新疆旅游摄影" class="inline-block HTSlider-tab-navitem">
+                <img alt="新疆旅游摄影" src="../_images/slider-index-small5.jpg">
+                <a href="http://www.huitu.com/topic-detail/1018.html" target="_blank">新疆旅游摄影</a>
+            </span>
+        </div>
+    </div>
+
+    <div class="demos-main">
+        <h2>带缩略图的滑动效果，上下滑动</h2>
+    </div>
+    <div class="pr indexSlider" id="indexSlider1">
+        <ul>
+            <li class="b-slider-list">
+                <a href="">
+                    <img src="../_images/slider-index-1.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-2.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-3.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-4.jpg" />
+                </a>
+            </li>
+            <li class="b-slider-list none">
+                <a href="">
+                    <img src="../_images/slider-index-5.jpg" />
+                </a>
+            </li>
+        </ul>
+        <div class="pa HTSlider-tab-nav" style="width: 381px; left: 405px; bottom:20px;">
+            <span title="2016猴年设计素材" class="inline-block HTSlider-tab-navitem  HTSlider-tab-navon">
+                <img alt="2016猴年设计素材" src="../_images/slider-index-small1.jpg">
+                <a href="http://www.huitu.com/topic-detail/1109.html" target="_blank">2016猴年设计素材</a>
+            </span>
+            <span title="猴年展板" class="inline-block HTSlider-tab-navitem">
+                <img alt="猴年展板" src="../_images/slider-index-small2.jpg">
+                <a href="http://www.huitu.com/topic-detail/1056.html" target="_blank">猴年展板</a>
+            </span>
+            <span title="呼伦贝尔草原图片" class="inline-block HTSlider-tab-navitem">
+                <img alt="呼伦贝尔草原图片" src="../_images/slider-index-small3.jpg">
+                <a href="http://www.huitu.com/topic-detail/853.html" target="_blank">呼伦贝尔草原图片</a>
+            </span>
+            <span title="全家福人像摄影专题" class="inline-block HTSlider-tab-navitem">
+                <img alt="全家福人像摄影专题" src="../_images/slider-index-small4.jpg">
+                <a href="http://www.huitu.com/topic-detail/1160.html" target="_blank">全家福人像摄影专题</a>
+            </span>
+            <span title="新疆旅游摄影" class="inline-block HTSlider-tab-navitem">
+                <img alt="新疆旅游摄影" src="../_images/slider-index-small5.jpg">
+                <a href="http://www.huitu.com/topic-detail/1018.html" target="_blank">新疆旅游摄影</a>
+            </span>
+        </div>
+    </div>
+    <div class="demos-main">
+        <h2>从左到右，播啊播</h2>
+    </div>
+    <div class="pr indexSlider1" id="indexSlider2">
+        <div class="HTSlider-imgbox fl">
+            <ul>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">薰衣草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">兰花草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">狗尾巴草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">墙头草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">毛毛草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+                <li class="fl HTSlider-imgitem b-slider-list">
+                    <span class="fl">•&nbsp;</span>
+                    <a target="_blank" href="#" class="HTSlider-imgitemAC fl">草草草草草</a>
+                    <span class="noticeList fl">
+                        <span style="font-size:12px;">￥</span>
+                        50.00
+                    </span>
+                    <span style="color:#909090;" class="fl">5分钟前</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+        <script charset="utf-8">
+            $(function () {
+                //var $con = $("#indexSlider");
+                //var $index = $con.find(".HTSlider-tab-navitem");
+                //bamboo.slider({
+                //    autoTime: 2000,
+                //    $container: $con,
+                //    indexClass: "HTSlider-tab-navitem",
+                //    onSwitch: function ($show) {
+                //        $index.removeClass("HTSlider-tab-navon").eq($show.index()).addClass("HTSlider-tab-navon");
+                //    }
+                //})
+
+                //var $con1 = $("#indexSlider1");
+                //var $index1 = $con1.find(".HTSlider-tab-navitem");
+                //bamboo.slider({
+                //    autoTime: 2000,
+                //    direction: "vertical",
+                //    $container: $con1,
+                //    indexClass: "HTSlider-tab-navitem",
+                //    onSwitch: function ($show) {
+                //        $index1.removeClass("HTSlider-tab-navon").eq($show.index()).addClass("HTSlider-tab-navon");
+                //    }
+                //})
+            });
+        </script>
+</body>
+
+</html>

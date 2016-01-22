@@ -5,7 +5,7 @@
  @License：LGPL       
  */
 
-(function ($) {
+$(function () {
     var win = window;
     var $win = $(window);
     var $doc = $(document);
@@ -22,7 +22,8 @@
 
     win.bamboo = {
         version: '0.0',
-        ie6: !!win.ActiveXObject && !win.XMLHttpRequest
+        ie6: !!win.ActiveXObject && !win.XMLHttpRequest,
+        isAnimation: typeof history.pushState == "function" // 是否支持transform， translation等动画
     }
     // cookie相关
     bamboo.cookie = function (key, value, options) {
@@ -72,10 +73,10 @@
             denyBind: false
         };
         var o = $.extend(defaults, opts);
-        if(!o.denyBind){
+        if (!o.denyBind) {
             $(document).on("focus.placeholder", "input, textarea", function () {
                 var $t = $(this);
-                setTimeout(function(){ $t.next("div.extraIntro").hide();},50)
+                setTimeout(function () { $t.next("div.extraIntro").hide(); }, 50)
             }).on("blur.placeholder", "input, textarea", function () {
                 if ($.trim($(this).val()) == "") {
                     $(this).next("div.extraIntro").show();
@@ -501,7 +502,7 @@
     }());
 
     // 添加script
-    bamboo.addScriptToBody = function(varSrc, varInnerHTML) {
+    bamboo.addScriptToBody = function (varSrc, varInnerHTML) {
         var varScript = document.createElement("script");
         if (varSrc != "") {
             varScript.src = varSrc;
@@ -579,10 +580,10 @@
                     M.preventDefault();
                     //控制元素不被拖出窗口外
                     if (!opts.moveOut) {
-                        try{
+                        try {
                             var po = opts.$moveLimit.position();
-                        }catch(e){
-                            var po = {left:0, top: 0}
+                        } catch (e) {
+                            var po = { left: 0, top: 0 }
                         }
                         var limitL = po.left;
                         var limitR = opts.$moveLimit.outerWidth() - opts.moveO.outerWidth() + po.left + opts.$moveLimit.scrollLeft();
@@ -639,7 +640,7 @@
         if (!opts.$tar[0]) return;
 
         // 创建四边触发元素
-        !opts.$resize ? (function(){
+        !opts.$resize ? (function () {
             // 无触发的元素
             var direct = opts.lockRate ? ["nw", "ne", "sw", "se"] : ["nw", "n", "ne", "w", "e", "sw", "s", "se"];
             var str = '';
@@ -658,10 +659,10 @@
             var tag = opts._tag;
             var w = isWest ? (info.w - info.x * opts.xresizeUnit) : (info.w + info.x * opts.xresizeUnit);
             var h = isNorth ? (info.h - info.y) : (info.h + info.y);
-            
+
             h = (tag.indexOf("n") < 0 && tag.indexOf("s") < 0) ? false : h;
             w = (tag.indexOf("w") < 0 && tag.indexOf("e") < 0) ? false : w;
-            
+
             // 固定缩放比
             if (opts.lockRate) {
                 var h = w / rate;
@@ -674,7 +675,7 @@
                 h = opts._tempTop + opts._tempHeight;
                 opts.$tar.css("top", opts._tempHeight - opts.minHeight); // 移动快的时候top会大于0。强制等于0
             }
-            
+
             return { w: w, h: h }
         }
         // 设置目标元素大小，位置，区域限制在这里处理
@@ -690,11 +691,11 @@
             var limitW = opts.$limit.width();
             var limitH = opts.$limit.height();
             // 右边界限定
-            if (l !== false && w !== false && (l+w > limitW)) {
-                w = limitW  - l;
+            if (l !== false && w !== false && (l + w > limitW)) {
+                w = limitW - l;
             }
             // 下边界限定
-            if (t !== false && h !== false && (t+h > limitH)) {
+            if (t !== false && h !== false && (t + h > limitH)) {
                 h = limitH - t;
             }
             // 最小边，最大边限制
@@ -714,7 +715,7 @@
                 // 有宽高比限制时
                 if (opts.lockRate) {
                     if (rate <= 1) { // 长度 大于 高度
-                        h = opts.minWidth/rate;
+                        h = opts.minWidth / rate;
                     }
                 }
                 w = opts.minWidth;
@@ -759,7 +760,7 @@
             if (isNorth && (opts._tempHeight - info.y >= opts.maxHeight)) {
                 t = opts._tempTop + opts._tempHeight - opts.maxHeight;
             }
-           
+
             if (w !== false) opts.$tar.css({ width: w + "px" });
             if (h !== false) opts.$tar.css({ height: h + "px" });
             if (t !== false) { opts.$tar.css({ top: t + "px" }); }
@@ -794,7 +795,7 @@
                     case "w":
                         isWest = true; isNorth = false;
                         wh = _getWH(info, isWest, isNorth);
-                        pO = {t: opts._tempTop, l: opts._tempLeft + offsetX };
+                        pO = { t: opts._tempTop, l: opts._tempLeft + offsetX };
                         break;
                     case "e":
                         isWest = false; isNorth = false;
@@ -949,7 +950,7 @@
 
         t.auto(times)
         opts.iframeAuto ? (function () { })() : t.offset();
-        if(opts.move){
+        if (opts.move) {
             bamboo.drag({
                 $drag: t.layero.find(opts.move),
                 $tar: t.layero,
@@ -1044,7 +1045,7 @@
         }
         layero.css({ top: t.offsetTop, left: t.offsetLeft });
     };
-    
+
     Layer.pt.callback = function () {
         var t = this, layero = t.layero, opts = t.opts;
         // 成功后回调
@@ -1476,7 +1477,7 @@
             var $bgimg = _$html.find("img");
             bamboo.resize({
                 $tar: $bgimg,
-                xresizeUnit: w/200,
+                xresizeUnit: w / 200,
                 minWidth: 200,
                 maxWidth: w,
                 minHeight: 200,
@@ -1504,7 +1505,7 @@
                     $drag.css("background-size", $bgimg.width() + "px", $bgimg.height() + "px");
                     // 预览图背景
                     opts.$viewDiv.find(".b-ic-view").css("background-size", $bgimg.width() + "px", $bgimg.height() + "px");
-                 }
+                }
             });
 
             // 拖动
@@ -1518,7 +1519,7 @@
                     opts.$viewDiv.find(".b-ic-view").css('background-position', '-' + x + 'px -' + y + 'px');
                 }
             });
-            
+
             // 缩放拖动区域
             bamboo.resize({
                 $tar: $drag,
@@ -1544,12 +1545,155 @@
     }
 
     // 图片轮播
+    /*
+    * 2016.1.21
+    */
+    function Slider(opts) {
+       
+        var defaults = {
+            // $container: null, // 轮播组件最外层元素
+            // prevNextClass, //String 上一张下一张元素所对应的class
+            // indexClass, //String 底部的索引或者其它点击切换各个主体的元素所对应的标志class
+            autoTime: 0, // number, ms自动轮播的时间， 0时不自动播放
+            animationTime: 500, //number 动画变化的时间
+            animation: "translate", // String,  左右滑动：translate(默认),  淡入淡出：fade, 无效果：none, 
+            direction: "horizontal" //String, horizontal || vertical 只有在translate时生效。 
+        }
+        var t = this;
+        Slider.index++;
+        t.opts = $.extend(defaults, opts);
+        t.init();
+    }
+    Slider.index = 0;
+    Slider.pt = Slider.prototype;
+    Slider.pt.init = function () {
+        var t = this, o = t.opts;
+        // 所有的主体内容
+        var $listArr = o.$listArr = o.$container.find(".b-slider-list");
+        o.length = $listArr.length;
+        if (o.length <= 0) return; // 没有元素，返回
+        $.each($listArr, function (i, n) {
+            $(n).attr("index", i);
+        })
+        t.autoTimer = null;
+        o.currIndex = 0;
+        // 事件绑定
+        // 底部的索引（或者其它的缩略信息）绑定， 左右按钮触发绑定
+        if (o.indexClass) { 
+            o.$container.on("click", "." + o.indexClass, function () {
+                var index = $(this).index();
+                var $hide = $listArr.eq(o.currIndex);
+                var $show = $listArr.eq(index);
+                t.go($hide, $show);
+                o.currIndex = index;
+            });
+        }
+        // 左右按钮绑定
+        if (o.prevNextClass) {
+            o.$container.on("click", "."+ o.prevNextClass, function () {
+                
+            });
+        }
+     
+        // 自动播放
+        if (o.autoTime) {
+            t.autoGo();
+            // 鼠标移过，停止播放
+            o.$container.on("mouseover", function () {
+                clearTimeout(t.autoTimer);
+            }).on("mouseout", function () {
+                t.autoGo();
+            });
+        }
+    }
+    // 对移动的元素translation的设置
+    Slider.pt._transition = function ($tar, time) {
+        // 支持css3属性
+        if (bamboo.isAnimation) {
+            $tar.css({
+                transition: "transform "+ time +"ms linear"
+            })
+        }
+    }
+    // 移动
+    Slider.pt._translate = function ($tar, value, time) {
+        if (bamboo.isAnimation) {
+            $tar.css({
+                transform: "translate" + ((this.opts.direction == "vertical") ? "Y" : "X") + "(" + value + "%)"
+            })
+        } else { // ie6-9等老式浏览器
+            if(this.opts.direction == "vertical"){
+                $tar.animate({
+                    top: value + "%"
+                }, time)
+            } else {
+                $tar.animate({
+                    left: value + "%"
+                }, time)
+            }
+        }
+    }
+    Slider.pt.go = function ($hide, $show, param) {
+        var t = this, o = t.opts;
+        if (!param) param = {};
+        var isNext = 1, hundred = 100;
+        var indexHide = $hide.attr("index");
+        var indexShow = $show.attr("index");
+        if (indexHide == indexShow) return;
+        switch (o.animation) {
+            case "translate":
+                // 比较前后的位置，确定移动的方向
+                // 左右按钮
+                if (param.prevNext) {
+                    isNext = prevNext == "next" ? 1 : 0;
+                } else {
+                    isNext = indexShow > indexHide ? 1 : 0;
+                }
+                hundred = (isNext * 2 - 1) * 100;
+                $show.show();
+                // 用户无感觉，乾坤大挪移到所需的位置，准备移动
+                t._transition($show, 0);
+                t._translate($show, hundred, 0);
+                // $hide 移出， $show移入
+                setTimeout(function () {
+                    t._transition($hide, o.animationTime);
+                    t._transition($show, o.animationTime);
+                    t._translate($show, 0, o.animationTime);
+                    t._translate($hide, -hundred, o.animationTime);
+                    
+                }, 20)
+                break;
+            default:
+                break;
+        }
+        o.onSwitch.call(t, $show);
+    }
+    Slider.pt.goNext = function () {
+        var t = this, o = t.opts;
+        var $hide = o.$listArr.eq(o.currIndex);
+        o.currIndex = o.currIndex >= (o.length - 1) ? 0 : o.currIndex + 1;
+        var $show = o.$listArr.eq(o.currIndex);
+        t.go($hide, $show);
+    }
+    Slider.pt.autoGo = function () {
+        var t = this, o = t.opts;
+        clearTimeout(t.autoTimer);
+        t.autoTimer = setTimeout(function () {
+            t.goNext();
+            t.autoGo();
+        }, o.autoTime)
+    }
+    bamboo.slider = function (opts) {
+        return new Slider(opts);
+    }
+
 
     // 图片懒加载
 
     // 文件上传
 
     // 自定义滚动条
-}($))
+})
+
 
 
