@@ -1,24 +1,28 @@
-body{font-size:14px;font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "宋体"}
-.navbar{border: 1px solid transparent;  margin-bottom: 20px; width:100%; height: 50px;  position: fixed;background:#222;font:12px/50px microsoft yahei;}
-.navbar-inner-wrap{width:80%;float:right;}
-.navbar-header{float:left}
-.navbar a:link, .navbar a:visited{color:#999;text-decoration: none;font-size:15px;}
-.navbar a:hover{color:#fff}
-.navbar-list-wrap li{float:left;display:inline;}
-.navbar-list-wrap li a{padding:10px 15px}
-
-.index-main{margin-top:50px;float:left;width:100%}
+body{font-size:14px;font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "宋体";padding:0;margin:0;}
+.navbar{width:100%; height: 60px;  position: fixed;background:#29282e;font:12px/60px microsoft yahei;z-index: 100;}
+.navbar-left-wrap{float:left;background:url(../src/default/logo.png) no-repeat;margin-left:27px;margin-top:6px;}
+.navbar-left-wrap a{display:block;width:134px;height:39px;}
+.navbar a:link,.navbar a:visited{color:#e6e6e6;text-decoration:none;font-size:16px;}
+.navbar a:hover{color:#fff;}
+.navbar-right-wrap{float:right;width:82%;}
+.navbar-right-wrap li{float:left;}
+.navbar-right-wrap li a{padding:0 30px;}
+.index-main{margin-top:60px;float:left;width:100%;}
+.index-main-left{position:absolute;width:230px;background:#f1f1f1;border-right:1px solid #d5d5d5;}
+.nav-level-1{float:left;}
+.index-main-right{position:absolute;}
 .nav-left{float:left;display:inline;font-size:14px;color:#555;width:100%}
-.nav-level-1{padding-top:12px;float:left;display:inline;width:100%;}
-.nav-level-1 h4{border-bottom:1px solid #eee;width:100%;float:left;display:inline;padding-bottom:5px;font-size:18px;color:#333}
-.nav-level-1-list{float:left;display:inline;width:100%;}
-.nav-level-2{padding-top:12px;float:left;display:inline;}
-.nav-level-2-list{float:left;display:inline;}
-
-.nav-level-2-list a,.nav-level-2-list a:link, .nav-level-2-list a:visited{padding:4px 14px;border-radius:3px;float:left;display: inline;color:#555;text-decoration:none;}
-.nav-level-2-list a:hover{background: #EBEBEB;color:#000;cursor:pointer;}
-.nav-level-2-list.active a:link,.nav-level-2-list.active a:visited { background-color: #428bca; color: #ffffff;}
-.index-center{width:520px;}
+.nav-level-1{float:left;display:inline;width:100%;}
+.nav-level-1 h4{border-bottom:1px solid #d5d5d5;width:200px;float:left;display:inline;padding-bottom:5px;font-size:16px;color:#333;padding-left:30px;height:40px;line-height:50px;}
+.nav-level-1-list{float:left;display:inline;cursor:pointer;}
+.nav-level-2{border-bottom:1px solid #d5d5d5;background:#fff;float:left;padding:10px 0;}
+.nav-level-2-list{float:left;display:inline;width:200px;padding-left:30px;height:40px;line-height:40px;}
+.nav-level-2 a{color:#404040;text-decoration:none;padding: 0 5px;}
+.nav-level-2 a:hover{color:#ff6600;}
+.nav-level-2 li:hover{color:#ff6600;}
+.nav-level-2 .cur,.nav-level-2 .cur:hover{color:#ff6600;}
+.nav-level-2 .cur a{color:#ff6600;}
+.nav-level-1 .mainmenu-cur{float:right;display:inline;width:16px;height:16px;border-radius:16px;background:#b5b5b5;margin-right:30px;}
 
 /*大标题*/
 .big-title{border-bottom: 1px solid #e5e5e5;font-size:21px;padding: 3px 0 6px}

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="../../../src/bamboo.css" />
+    <link type="text/css" rel="stylesheet" href="../../demo.css" />
+    <script src="../../../src/jquery-1.10.1.min.js"></script>
+    <script src="../../../src/bamboo-1.0.1.all.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="demos-main">
+        <h2 class="demo-title1 mt15">设置cookie</h2>
+        <input id="set1" class="mt15" type="button" value="设置cookie值： UserId" />
+        <input id="set2" class="ml20" type="button" value="设置cookie值： User Id" />
+        <h2 class="demo-title1 mt15">读取cookie</h2>
+        <input id="read1" class="mt15" type="button" value="读取cookie值： UserId" />
+        <input id="read2" class="ml20" type="button" value="读取cookie值： User Id" />
+        <h2 class="demo-title1 mt15">删除cookie</h2>
+        <input id="remove1" class="mt15" type="button" value="删除cookie值： UserId" />
+        <input id="remove2" class="ml20" type="button" value="删除cookie值： User Id" />
+    </div>
+   <script>
+       var $set1 = $("#set1"),
+           $set2 = $("#set2"),
+           $read1 = $("#read1"),
+           $read2 = $("#read2"),
+           $remove1 = $("#remove1"),
+           $remove2 = $("#remove2");
+
+       // 设置
+       $("#set1").on("click", function () {
+           bamboo.cookie('UserId', '19901001', {domain: 'localhost'});
+       })
+       $("#set2").on("click", function () {
+           bamboo.cookie('User Id', 199000);
+       })
+       // 读取
+       $("#read1").on("click", function () {
+           alert(bamboo.cookie());
+       })
+       $("#read2").on("click", function () {
+           alert(bamboo.cookie("User Id"));
+       })
+       // 删除
+       $("#remove1").on("click", function () {
+           alert(bamboo.removeCookie("UserId"));
+       })
+       $("#remove2").on("click", function () {
+           alert(bamboo.removeCookie("User Id"));
+       })
+   </script>
+</body>
+
+
+</html>

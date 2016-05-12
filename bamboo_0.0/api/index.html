@@ -10,32 +10,25 @@
     <script src="indexData.js"></script>
 </head>
 <body>
-    <div class="navbar" style="z-index:1" role="navigation">
-        <div class="navbar-inner-wrap">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="../demos/index.html">
-                    BAMBOO UI
-                </a>
-            </div>
-            <div class="navbar-list-wrap">
-                <ul>
-                    <li>
-                        <a href="#"><i class="fa fa-book"></i> API</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">案例展示</a>
-                    </li>
-                    <li class="">
-                        <a href="#">关于</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="navbar">
+        <div class="navbar-left-wrap">
+            <a title="" href="../demos/index.html"></a>
+        </div>
+        <div class="navbar-right-wrap">
+            <ul>
+                <li>
+                    <a href="../demos/index.html">BAMBOO UI</a>
+                    <a href="../api/index.html">API</a>
+                    <a href="">案例展示</a>
+                    <a href="">关于</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <div id="main" class="index-main" style="z-index:2">
-        <div class="pa w200" style="left:20px;" id="left">
+    <div id="main" class="index-main">
+        <div class="index-main-left" id="left">
         </div>
-        <div class="pa none" id="right">
+        <div class="index-main-right" id="right">
             <iframe class="rightIframe" frameborder="0" src="apis/dialog/intro.html"></iframe>
         </div>
     </div>
@@ -47,28 +40,41 @@
         var $iframe = $right.find("iframe");
         var win_w = $(window).width();
         var win_h = $(window).height();
-        $main.css({ "height": (win_h - 70) + "px" });
-        $iframe.css({ "height": (win_h - 75) + "px" });
-        $right.css({"left": "240px", "width": (win_w - 240)+"px"}).show();
+        $main.css({ "height": (win_h - 60) + "px" });
+        $iframe.css({ "height": (win_h - 65) + "px" });
+        $right.css({"left": "250px", "width": (win_w - 250)+"px"}).show();
         function getLeftNavi() {
-            var str = '';
+            var str = '<ul class="nav-level-1">';
             for (var i = 0; i < indexdata.length; i++) {
-                str += '<ul class="nav-level-1"><li class="nav-level-1-list"><h4>' + indexdata[i].text + '</h4> <ul class="nav-level-2">';
+                str += '<li class="nav-level-1-list"><h4>' + indexdata[i].text + '</h4><ul class="nav-level-2">';
                 if (indexdata[i].children.length > 0) {
                     for (var j = 0; j < indexdata[i].children.length; j++) {
                         var listO = indexdata[i].children[j];
-                        str += '<li class="nav-level-2-list" url="' + listO.url + '"><a href="javascript:void(0)">' + listO.text + '</a></li>';
+                        str += '<li class="nav-level-2-list" url="' + listO.url + '"><span>></span><a href="javascript:void(0)">' + listO.text + '</a></li>';
                     }
                 }
+                str +='</ul></li>';
             }
-            str += '</ul></li></ul>';
+            str += '</ul>';
             return str;
         }
-        $(function () {
+        $(function(){
             $left.html(getLeftNavi());
-            $left.on("click", ".nav-level-2-list", function () {
-                $iframe.prop("src", $(this).attr("url"));
-            })
+            var $mainmenu = $('.nav-level-1');
+            var $submenu = $('.nav-level-2');
+            $submenu.hide();
+            $submenu.first().show();
+            $submenu.on('click','li',function(){
+                $submenu.find('li').removeClass("cur");
+                $(this).addClass("cur");
+                $iframe.prop("src",$(this).attr("url"));
+            });
+            $mainmenu.on('click','li',function(){
+                //$submenu.prev('h4').append("<span></span>").removeClass("mainmenu-cur");
+                //$('.nav-level-2',this).prev('h4').addClass("mainmenu-cur");
+                $(this).children("ul").slideDown(700);
+                $(this).siblings().children("ul").slideUp();
+            });
         })
     </script>
 </html>

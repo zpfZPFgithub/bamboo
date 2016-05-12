@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="http://skin.huitu.com/css/base.css" />
+	<link type="text/css" rel="stylesheet" href="index.css" />
+	<script src="../src/jquery-1.10.1.min.js"></script>
+	<script src="stateman.js"></script>
+	<script src="indexData-noiframe.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left-wrap">
+            <a title="" href="../demos/index.html"></a>
+        </div>
+        <div class="navbar-right-wrap">
+            <ul>
+                <li>
+                    <a href="../demos/index.html">BAMBOO UI</a>
+                    <a href="../api/index.html">API</a>
+                    <a href="">案例展示</a>
+                    <a href="">关于</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main" class="index-main">
+        <div class="index-main-left" id="left">
+        </div>
+        <div class="index-main-right" id="right">
+           
+        </div>
+    </div>
+	<script type="text/javascript">
+        var $main = $("#main");
+        var $left = $("#left");
+        var $right = $("#right");
+        var win_w = $(window).width();
+        var win_h = $(window).height();
+        $main.css({ "height": (win_h - 60) + "px" });
+        $right.css({ "left": "250px", "width": (win_w - 250) + "px" }).show();
+        function getLeftNavi() {
+            var str = '<ul class="nav-level-1">';
+            for (var i = 0; i < indexdata.length; i++) {
+                str += '<li class="nav-level-1-list"><h4>' + indexdata[i].text + '</h4><ul class="nav-level-2">';
+                if (indexdata[i].children.length > 0) {
+                    for (var j = 0; j < indexdata[i].children.length; j++) {
+                        var listO = indexdata[i].children[j];
+                        str += '<li class="nav-level-2-list" url="' + listO.url + '"><div><span>></span><a href="javascript:void(0)">' + listO.text + '</a></div></li>';
+                    }
+                }
+                str += '</ul></li>';
+            }
+            str += '</ul>';
+            return str;
+        }
+        $(function () {
+            $left.html(getLeftNavi());
+            var $mainmenu = $('.nav-level-1');
+            var $submenu = $('.nav-level-2');
+            $submenu.hide();
+            $submenu.first().show();
+            $submenu.on('click', 'li', function () {
+                $submenu.find('li').removeClass("cur");
+                $(this).addClass("cur");
+            });
+            $mainmenu.on('click', 'li', function () {
+                $(this).children("ul").slideDown(700);
+                $(this).siblings().children("ul").slideUp();
+            });
+        })
+    </script>
+</body>
+    
+</html>

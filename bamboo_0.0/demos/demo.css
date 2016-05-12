@@ -1,3 +1,11 @@
-body{font-size:14px;font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "宋体";padding:20px 0 80px 0;}
-.demos-main{margin:20px 0 0 20px;width:95%;}
-.demo-title1{font-weight:bold; color:#333;font-size:18px;margin-top:20px;margin-top:20px}
+body{font-size:14px;font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif, "宋体"}
+a{color:#404040;text-decoration:none;}
+.clearfix::after {clear: both;content: " ";display: block;height: 0;}
+.demos-main{margin-top: 20px;}
+.demolist{position:relative;}
+.demolist li{display:inline-block;font-size:14px;margin:0 0 0 20px;width:200px;}
+.demolist li:first-child{margin-left:0;}
+.demolist li div{text-align:center;background:#5cb72f;border:1px solid #4d9928;width:200px;height:35px;line-height:35px;color:#fff;border-radius:2px;}
+.demolist li a{float:left;display:block;text-align:center;height:30px;line-height:30px;background:#ecf0f1;border:1px solid #d7dcdf;margin-top:10px;width:200px;border-radius:2px;}
+.demos-select{margin-top:20px;}
+.demos-select h2{margin-bottom:10px;text-align:center;background:#5cb72f;border:1px solid #d9928;width:150px;height:35px;line-height:35px;color:#fff;border-radius:2px;}

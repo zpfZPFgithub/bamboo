@@ -1,10 +1,11 @@
-﻿/*
- @Name：bambooUI集合
- @Author：sinbad
- @version: 0.0
- @License：LGPL       
+﻿/**
+ * bamboo UI 代码，使用前申明即可。如需按需加载，后面考虑分离。
+ * 使用前需提前引用jQuery库
+ * @sinbad
+ * 2016.03.08
  */
 
+// 这里使用$(function(){}), 而不是立即执行函数。主要是考虑到$win，$doc，$body等跟dom相关变量的准确性
 $(function () {
     var win = window;
     var $win = $(window);
@@ -14,6 +15,9 @@ $(function () {
         throw new Error("全局变量bamboo重名了");
         return;
     }
+/**
+ * 工具函数拓展
+*/
     if (!win.console || !win.console.log) {
         win.console = {};
         win.console.log = function () { }
@@ -28,11 +32,11 @@ $(function () {
     // cookie相关
     bamboo.cookie = function (key, value, options) {
         options = $.extend({}, options);
-        // 写入cookie
         if (typeof options.expires == 'number') {
             expires = new Date();
             expires.setTime(expires.getTime() + options.expires * 24 * 60 * 60 * 1000);
         }
+		// 写入cookie
         if (arguments.length > 1) {
             return (document.cookie = [
                 encodeURIComponent(key), '=', encodeURIComponent(value),
@@ -102,7 +106,6 @@ $(function () {
         })
     }
 
-
     /*
     * 节流函数
     * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
@@ -155,7 +158,6 @@ $(function () {
     }
     (function () {
         'use strict';
-
         var rx_one = /^[\],:{}\s]*$/,
             rx_two = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,
             rx_three = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
@@ -501,7 +503,7 @@ $(function () {
         }
     }());
 
-    // 添加script
+    // 添加script到body
     bamboo.addScriptToBody = function (varSrc, varInnerHTML) {
         var varScript = document.createElement("script");
         if (varSrc != "") {
@@ -519,7 +521,6 @@ $(function () {
         var _bdhmProtocol = (("https:" == document.location.protocol) ? "https://" : "http://");
         bamboo.addScriptToBody(_bdhmProtocol + unescape("hm.baidu.com/h.js%3Fa4fa2a41b865534a782ceef2185fffaf"), "");
     }
-
     // 拖拽
     function Drag(o) {
         var defaults = {
@@ -588,7 +589,7 @@ $(function () {
                         var limitL = po.left;
                         var limitR = opts.$moveLimit.outerWidth() - opts.moveO.outerWidth() + po.left + opts.$moveLimit.scrollLeft();
                         var limitT = po.top;
-                        console.log(opts.moveO.outerHeight())
+                       
                         var limitB = opts.$moveLimit.outerHeight() - opts.moveO.outerHeight() + po.top + opts.$moveLimit.scrollTop();
                         // 左边界
                         offsetX < limitL && (offsetX = limitL);
@@ -848,7 +849,7 @@ $(function () {
         new Resize(o)
     }
     /*
-    ！ layer弹出层组件
+    layer弹出层组件
      @ date: 2015/12/14
     */
     function Layer(opts) {
@@ -1134,7 +1135,6 @@ $(function () {
         return new Layer(opts);
     };
 
-
     /*
     ！ select自定义选择框组件
         @ date: 2015/12/24
@@ -1311,10 +1311,16 @@ $(function () {
             opts.success.call(t, t)
         }
     }
+	
     bamboo.select = function ($el, opts) {
-        if ($el.length == 1) {
-            return new Select($el, opts);
-        }
+        if ($el.length <= 0) {
+            return;
+        }else{
+			$.each($el, function(i, n){
+				
+				new Select($(n), opts);
+			})
+		}
     }
 
     /*
@@ -1337,7 +1343,6 @@ $(function () {
         last: "尾页",
         prev: "上一页",
         next: "下一页"
-
     }
     Page.pt.init = function () {
         var t = this, opts = t.opts;
@@ -1352,8 +1357,8 @@ $(function () {
 
         //计算当前组
         dict.index = Math.ceil((opts.curr + ((opts.groups > 1 && opts.groups !== opts.pages) ? 1 : 0)) / (opts.groups === 0 ? 1 : opts.groups));
-        // 当前非首页，显示上一页
-        if (opts.curr > 1 && opts.prev) {
+        // 当前组非首组，显示上一页
+        if (opts.curr > 1 && opts.prev && dict.index > 1){
             view.push('<a href="javascript:;" class="b-page-prev" data-page="' + (opts.curr - 1) + '">' + opts.prev + '</a>');
         }
         //当前组非首组，则输出首页
@@ -1385,14 +1390,14 @@ $(function () {
         dict.flow = !opts.prev && opts.groups === 0;
         if (opts.curr !== opts.pages && opts.next || dict.flow) {
             view.push((function () {
-                return (dict.flow && opts.curr === opts.pages)
-                ? '<span class="page_nomore" title="&#x5DF2;&#x6CA1;&#x6709;&#x66F4;&#x591A;">' + opts.next + '</span>'
+                return ((opts.curr + Math.ceil(opts.groups/2)) > opts.pages )
+                ? '<a href="javascript:;" class="b-page-next" data-page="' + (opts.curr + 1) + '">' + opts.next + '</a>'
                 : '<a href="javascript:;" class="b-page-next" data-page="' + (opts.curr + 1) + '">' + opts.next + '</a>';
             }()));
         }
-        return '<div class="b-page-main ' + (opts.skin ? opts.skin : "") + '" id="b-page-' + t.opts.item + '">' + view.join('') + function () {
+        return '<div class="b-page-main '+ (opts.skin ? opts.skin : "") +'" id="b-page-' + t.opts.item + '">' + view.join('') + function () {
             return opts.skip
-            ? '<span class="b-page-total"><label>&#x5230;&#x7B2C;</label><input type="text" value="' + opts.curr + '" onkeyup="this.value=this.value.replace(/\\D/g, \'\');" class="b-page-_skip"><label>&#x9875;</label>'
+            ? '<span class="b-page-total"><label>&#x5230;&#x7B2C;</label><input type="text" value="'+ opts.curr +'" onkeyup="this.value=this.value.replace(/\\D/g, \'\');" class="b-page-_skip"><label>&#x9875;</label>'
             + '<button type="button" class="b-page-_btn">\&#x786e;&#x5b9a</button></span>'
             : '';
         }() + '</div>';
@@ -1402,8 +1407,8 @@ $(function () {
     Page.pt.render = function (isFirst) {
         var t = this, opts = t.opts;
         var view = t.getView();
-        opts.$e.html(view);
         opts.jump && opts.jump(t, isFirst);
+        opts.$e.html(view);    
     };
 
     // 分页事件绑定
@@ -1421,7 +1426,7 @@ $(function () {
                 if (curr > opts.pages) curr = opts.pages
                 if (curr) {
                     opts.curr = curr;
-                    t.render();
+                    opts.jump && opts.jump(t);
                 }
             })
         }
@@ -1430,8 +1435,6 @@ $(function () {
     bamboo.page = function (opts) {
         return new Page(opts);
     }
-
-
 
     /*
     ！ 图片操作层（拖动，缩放，预览等）
@@ -1545,19 +1548,19 @@ $(function () {
     }
 
     // 图片轮播
-    /*
-    * 2016.1.21
-    */
     function Slider(opts) {
-       
         var defaults = {
             // $container: null, // 轮播组件最外层元素
             // prevNextClass, //String 上一张下一张元素所对应的class
             // indexClass, //String 底部的索引或者其它点击切换各个主体的元素所对应的标志class
+            //$listContainer: null, //如果有，则animation只能是translate，实现方式采用超长卡带方式
+            // reverse: false, // 从左到右滚动
             autoTime: 0, // number, ms自动轮播的时间， 0时不自动播放
+            viewNum: 1, // 一次显示的数量
             animationTime: 500, //number 动画变化的时间
             animation: "translate", // String,  左右滑动：translate(默认),  淡入淡出：fade, 无效果：none, 
-            direction: "horizontal" //String, horizontal || vertical 只有在translate时生效。 
+            direction: "horizontal", //String, horizontal || vertical 只有在translate时生效。
+            number: 1 // 每次滚动的数目。默认1。
         }
         var t = this;
         Slider.index++;
@@ -1594,9 +1597,16 @@ $(function () {
                 
             });
         }
-     
         // 自动播放
         if (o.autoTime) {
+            if (o.reverse) {
+                o.currIndex = o.length - o.viewNum;
+                if (o.direction == "vertical") {
+                    o.$listContainer.css({ top: -$listArr.eq(o.currIndex).position().top + "px" });
+                } else {
+                    o.$listContainer.css({ left: -$listArr.eq(o.currIndex).position().left + "px" });
+                }
+            }
             t.autoGo();
             // 鼠标移过，停止播放
             o.$container.on("mouseover", function () {
@@ -1640,38 +1650,69 @@ $(function () {
         var indexHide = $hide.attr("index");
         var indexShow = $show.attr("index");
         if (indexHide == indexShow) return;
-        switch (o.animation) {
-            case "translate":
-                // 比较前后的位置，确定移动的方向
-                // 左右按钮
-                if (param.prevNext) {
-                    isNext = prevNext == "next" ? 1 : 0;
-                } else {
-                    isNext = indexShow > indexHide ? 1 : 0;
-                }
-                hundred = (isNext * 2 - 1) * 100;
-                $show.show();
-                // 用户无感觉，乾坤大挪移到所需的位置，准备移动
-                t._transition($show, 0);
-                t._translate($show, hundred, 0);
-                // $hide 移出， $show移入
-                setTimeout(function () {
-                    t._transition($hide, o.animationTime);
-                    t._transition($show, o.animationTime);
-                    t._translate($show, 0, o.animationTime);
-                    t._translate($hide, -hundred, o.animationTime);
+        if (!o.$listContainer) {
+            switch (o.animation) {
+                case "translate":
+                    // 比较前后的位置，确定移动的方向
+                    // 左右按钮
+                    if (param.prevNext) {
+                        isNext = prevNext == "next" ? 1 : 0;
+                    } else {
+                        isNext = indexShow > indexHide ? 1 : 0;
+                    }
+                    hundred = (isNext * 2 - 1) * 100;
+                    $show.show();
+                    // 用户无感觉，乾坤大挪移到所需的位置，准备移动
+                    t._transition($show, 0);
+                    t._translate($show, hundred, 0);
+                    // $hide 移出， $show移入
+                    setTimeout(function () {
+                        t._transition($hide, o.animationTime);
+                        t._transition($show, o.animationTime);
+                        t._translate($show, 0, o.animationTime);
+                        t._translate($hide, -hundred, o.animationTime);
                     
-                }, 20)
-                break;
-            default:
-                break;
+                    }, 20)
+                    break;
+                case "fade":
+                    $hide.fadeOut(o.animationTime);
+                    $show.fadeIn(o.animationTime);
+                    break;
+                default:
+                    break;
+            }
+            o.onSwitch.call(t, $show);
+        } else {
+            // 超长卡带式方式（一般定义超长ul）
+            var nextPosition = $show.position();
+            if (o.direction == "vertical") {
+                o.$listContainer.animate({ top: -nextPosition.top + "px" }, 600);
+            } else {
+                o.$listContainer.animate({ left: -nextPosition.left + "px" }, 600);
+            }
         }
-        o.onSwitch.call(t, $show);
+    }
+    Slider.pt.goPrev = function () {
+        var t = this, o = t.opts;
+        var $hide = o.$listArr.eq(o.currIndex);
+        //从右到左 || 从上到下
+        if (o.reverse) {
+            o.currIndex = o.currIndex <= 0 ? o.length - o.viewNum : o.currIndex - 1;
+        } else {
+            o.currIndex = (o.currIndex + o.viewNum) >= (o.length) ? 0 : o.currIndex + 1;
+        }
+        var $show = o.$listArr.eq(o.currIndex);
+        t.go($hide, $show);
     }
     Slider.pt.goNext = function () {
         var t = this, o = t.opts;
         var $hide = o.$listArr.eq(o.currIndex);
-        o.currIndex = o.currIndex >= (o.length - 1) ? 0 : o.currIndex + 1;
+        //从右到左 || 从上到下
+        if (o.reverse) {
+            o.currIndex = o.currIndex <= 0 ? o.length-o.viewNum : o.currIndex - 1;
+        } else {
+            o.currIndex = (o.currIndex + o.viewNum) >= (o.length) ? 0 : o.currIndex + 1;
+        }
         var $show = o.$listArr.eq(o.currIndex);
         t.go($hide, $show);
     }
@@ -1681,18 +1722,214 @@ $(function () {
         t.autoTimer = setTimeout(function () {
             t.goNext();
             t.autoGo();
-        }, o.autoTime)
+        }, o.autoTime);
     }
     bamboo.slider = function (opts) {
         return new Slider(opts);
     }
 
-
     // 图片懒加载
-
+	
     // 文件上传
 
     // 自定义滚动条
+	
+	
+	/**
+	 * 动画模块，对jQuery动画模块的拓展
+	 * 缓动函数，jQuery.easing
+	 * 贝塞尔曲线拓展
+	*/
+	bamboo.expandEasing = function(){
+		$.extend(jQuery.easing , {
+			easeIn: function(x,t, b, c, d){  //加速曲线
+				return c*(t/=d)*t + b;
+			},
+			easeOut: function(x,t, b, c, d){  //减速曲线
+				return -c *(t/=d)*(t-2) + b;
+			},
+			easeBoth: function(x,t, b, c, d){  //加速减速曲线
+				if ((t/=d/2) < 1) {
+					return c/2*t*t + b;
+				}
+				return -c/2 * ((--t)*(t-2) - 1) + b;
+			},
+			easeInStrong: function(x,t, b, c, d){  //加加速曲线
+				return c*(t/=d)*t*t*t + b;
+			},
+			easeOutStrong: function(x,t, b, c, d){  //减减速曲线
+				return -c * ((t=t/d-1)*t*t*t - 1) + b;
+			},
+			easeBothStrong: function(x,t, b, c, d){  //加加速减减速曲线
+				if ((t/=d/2) < 1) {
+					return c/2*t*t*t*t + b;
+				}
+				return -c/2 * ((t-=2)*t*t*t - 2) + b;
+			},
+			elasticIn: function(x,t, b, c, d, a, p){  //正弦衰减曲线（弹动渐入）
+				if (t === 0) { 
+					return b; 
+				}
+				if ( (t /= d) == 1 ) {
+					return b+c; 
+				}
+				if (!p) {
+					p=d*0.3; 
+				}
+				if (!a || a < Math.abs(c)) {
+					a = c; 
+					var s = p/4;
+				} else {
+					var s = p/(2*Math.PI) * Math.asin (c/a);
+				}
+				return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+			},
+			elasticOut: function(x,t, b, c, d, a, p){    //正弦增强曲线（弹动渐出）
+				if (t === 0) {
+					return b;
+				}
+				if ( (t /= d) == 1 ) {
+					return b+c;
+				}
+				if (!p) {
+					p=d*0.3;
+				}
+				if (!a || a < Math.abs(c)) {
+					a = c;
+					var s = p / 4;
+				} else {
+					var s = p/(2*Math.PI) * Math.asin (c/a);
+				}
+				return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
+			},    
+			elasticBoth: function(x,t, b, c, d, a, p){
+				if (t === 0) {
+					return b;
+				}
+				if ( (t /= d/2) == 2 ) {
+					return b+c;
+				}
+				if (!p) {
+					p = d*(0.3*1.5);
+				}
+				if ( !a || a < Math.abs(c) ) {
+					a = c; 
+					var s = p/4;
+				}
+				else {
+					var s = p/(2*Math.PI) * Math.asin (c/a);
+				}
+				if (t < 1) {
+					return - 0.5*(a*Math.pow(2,10*(t-=1)) * 
+							Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+				}
+				return a*Math.pow(2,-10*(t-=1)) * 
+						Math.sin( (t*d-s)*(2*Math.PI)/p )*0.5 + c + b;
+			},
+			backIn: function(x,t, b, c, d, s){     //回退加速（回退渐入）
+				if (typeof s == 'undefined') {
+				   s = 1.70158;
+				}
+				return c*(t/=d)*t*((s+1)*t - s) + b;
+			},
+			backOut: function(x,t, b, c, d, s){
+				if (typeof s == 'undefined') {
+					s = 3.70158;  //回缩的距离
+				}
+				return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+			}, 
+			backBoth: function(x,t, b, c, d, s){
+				if (typeof s == 'undefined') {
+					s = 1.70158; 
+				}
+				if ((t /= d/2 ) < 1) {
+					return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+				}
+				return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+			},
+			bounceIn: function(x,t, b, c, d){    //弹球减振（弹球渐出）
+				return c - this['bounceOut'](x,d-t, 0, c, d) + b;
+			},       
+			bounceOut: function(x,t, b, c, d){
+				if ((t/=d) < (1/2.75)) {
+					return c*(7.5625*t*t) + b;
+				} else if (t < (2/2.75)) {
+					return c*(7.5625*(t-=(1.5/2.75))*t + 0.75) + b;
+				} else if (t < (2.5/2.75)) {
+					return c*(7.5625*(t-=(2.25/2.75))*t + 0.9375) + b;
+				}
+				return c*(7.5625*(t-=(2.625/2.75))*t + 0.984375) + b;
+			},      
+			bounceBoth: function(x,t, b, c, d){
+				if (t < d/2) {
+					return this['bounceIn'](x,t*2, 0, c, d) * 0.5 + b;
+				}
+				return this['bounceOut'](x,t*2-d, 0, c, d) * 0.5 + c*0.5 + b;
+			}
+			
+		});
+	}
+	// 贝塞尔曲线拓展
+	var V = {
+		rotate: function(p, degrees) {
+			var radians = degrees * Math.PI / 180,
+			c = Math.cos(radians),
+			s = Math.sin(radians);
+			return [c*p[0] - s*p[1], s*p[0] + c*p[1]];
+		},
+		scale: function(p, n) {
+			return [n*p[0], n*p[1]];
+		},
+		add: function(a, b) {
+			return [a[0]+b[0], a[1]+b[1]];
+		},
+		minus: function(a, b) {
+			return [a[0]-b[0], a[1]-b[1]];
+		}
+	};
+	var Bezier = function( params, rotate ) {
+		params.start = $.extend( {angle: 0, length: 0.3333}, params.start );
+		params.end = $.extend( {angle: 0, length: 0.3333}, params.end );
+		this.p1 = [params.start.x, params.start.y];
+		this.p4 = [params.end.x, params.end.y];
+		var v14 = V.minus( this.p4, this.p1 ),
+		v12 = V.scale( v14, params.start.length ),
+		v41 = V.scale( v14, -1 ),
+		v43 = V.scale( v41, params.end.length );
+		v12 = V.rotate( v12, params.start.angle );
+		this.p2 = V.add( this.p1, v12 );
+		v43 = V.rotate(v43, params.end.angle );
+		this.p3 = V.add( this.p4, v43 );
+		this.f1 = function(t) { return (t*t*t); };
+		this.f2 = function(t) { return (3*t*t*(1-t)); };
+		this.f3 = function(t) { return (3*t*(1-t)*(1-t)); };
+		this.f4 = function(t) { return ((1-t)*(1-t)*(1-t)); };
+		/* p from 0 to 1 */
+		this.css = function(p) {
+			var f1 = this.f1(p), f2 = this.f2(p), f3 = this.f3(p), f4=this.f4(p), css = {};
+			if (rotate) {
+				css.prevX = this.x;
+				css.prevY = this.y;
+			}
+			css.x = this.x = ( this.p1[0]*f1 + this.p2[0]*f2 +this.p3[0]*f3 + this.p4[0]*f4 +.5 )|0;
+			css.y = this.y = ( this.p1[1]*f1 + this.p2[1]*f2 +this.p3[1]*f3 + this.p4[1]*f4 +.5 )|0;
+			css.left = css.x + "px";
+			css.top = css.y + "px";
+			return css;
+		};
+		$.fx.step.path = function(fx) {
+			var css = fx.end.css( 1 - fx.pos );
+			if ( css.prevX != null ) {
+				$.cssHooks.transform.set( fx.elem, "rotate(" + Math.atan2(css.prevY - css.y, css.prevX - css.x) + ")" );
+			}
+			fx.elem.style.top = css.top;
+			fx.elem.style.left = css.left;
+		};
+	};
+	bamboo.bezier = function(params, rotate){
+		return new Bezier(params, rotate)
+	}
+	
 })
 
 
